@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.calculator-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+.button-block {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding-top: 20px;
+
+    border-top: 1px solid #f3f3f3;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 25px;
+    background-color: #f4f4f4;
+    border-radius: 200px;
+    font-size: 26px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+}
+
+.btn:hover {
+    background-color: #ced4da;
+    transition: .3s ease-in;
+}
+
+.separator-block {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.input-block {
+    color: #0d9700;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-height: 250px;
+    font-size: 18px;
+}
+
+.input-label {
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+}
+
+.input-sum {
+    width: 100%;
+    display: block;
+    min-height: 100px;
+    text-align: right;
+    border: none;
+    font-size: 26px;
+    resize: none;
+    padding-right: 10px;
+    caret-color: #80cbc4;
+}
+
+.input-sum::-webkit-scrollbar {
+    width: 3px;
+}
+
+.input-sum::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.003);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.003);
+}
+
+.input-sum::-webkit-scrollbar-thumb {
+    background-color: #ced4da;
+}
+
+.input-sum:focus {
+    outline: none;
+}
+
+.clear {
+    color: #e3694c;
+}
+
+.operators {
+    color: #569415;
+}
+
+.equal {
+    background-color: #68b31a;
+    color: #fff;
+}
+
+.equal:hover {
+    background-color: #68b31a;
+    color: #fff;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.icon svg {
+    font-size: 10px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.main {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alertik {
+    width: 100%;
+}

@@ -1,0 +1,14 @@
+{
+    "notFinished": {
+        "title": "The calculation is not yet finished",
+        "description": "Make a proper line of calculation then click the equal button!"
+    },
+    "percent": {
+        "title": "The result of the calculation is not a number",
+        "description": "Please make use of the percent button for only one single integer, rather than using for calculations"
+    },
+    "forever": {
+        "title": "The result is infinite (&infin;)",
+        "description": "Do NOT try to play games with a JS Calculator. Go find something better to do!"
+    }
+}
