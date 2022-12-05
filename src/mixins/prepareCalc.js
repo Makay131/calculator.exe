@@ -9,18 +9,18 @@ export default {
     watch: {
         valueVisible(nw, old) {
           ['+', '÷', 'x', '-', '.'].map((op,i, arr)=> {
-          if(nw === old + op && (nw.at(-1) === op && nw.at(-2) === op)) setValueVisible(old);
-          if(nw.at(-1) === op && arr.includes(nw.at(-2))) setValueVisible(old);
+          if(nw === old + op && (nw.at(-1) === op && nw.at(-2) === op)) this.setValueVisible(old);
+          if(nw.at(-1) === op && arr.includes(nw.at(-2))) this.setValueVisible(old);
           });
     
-          if(nw.includes('.') && this.valueVisible.lastIndexOf('.') > this.valueVisible.indexOf('.') && this.checkDotUsageRepeatedly()) setValueVisible(old);
+          if(nw.includes('.') && this.valueVisible.lastIndexOf('.') > this.valueVisible.indexOf('.') && this.checkDotUsageRepeatedly()) this.setValueVisible(old);
           if(nw.includes('%') && nw.lastIndexOf('%') !== -1 && nw.lastIndexOf('%') === nw.length-1) {
             let oldVal = (+old / 100).toString();
             this.clear();
             if(isNaN(oldVal)) {
               this.showError(config.percent.title, config.percent.description)
             } else
-            setValueVisible(oldVal);
+            this.setValueVisible(oldVal);
           }
     
           //for 0000 bug
