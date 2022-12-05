@@ -1,6 +1,6 @@
 <template>
       <div class="main">
-      <Alert :title="title" :msg="description" class="alertik" v-if="error"/>
+      <Alert :title="title" :msg="description" class="alertik" @close="closeError" v-if="error"/>
       <div class="calculator-block">
     <div class="input-block">
       <textarea class="input-sum" autofocus rows="7" v-model="valueVisible" ref="textarea" @keydown="controlPressedKey"></textarea>
@@ -175,11 +175,13 @@ export default {
       else return false;
     },
     showError(title, desc) {
-      console.log('wtf error')
       this.clear();
       this.title = `Error: ${title}!`;
       this.description = desc;
       this.error = true;
+    },
+    closeError() {
+      this.error = false;
     },
     handleBackspace() {
       this.valueVisible ? this.valueVisible = this.valueVisible.slice(0, this.valueVisible.length-1) : '';

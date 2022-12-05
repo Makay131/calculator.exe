@@ -8,7 +8,7 @@
         "description": "Please make use of the percent button for only one single integer, rather than using for calculations"
     },
     "forever": {
-        "title": "The result is infinite (&infin;)",
+        "title": "The result is infinite (∞)",
         "description": "Do NOT try to play games with a JS Calculator. Go find something better to do!"
     }
 }

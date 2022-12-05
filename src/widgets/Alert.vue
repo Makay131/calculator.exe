@@ -25,7 +25,7 @@ export default {
     props: ['title', 'msg'],
 	methods: {
 		handleClose() {
-			console.log('clicked')
+			this.$emit('close');
 		}
 	}
 };
