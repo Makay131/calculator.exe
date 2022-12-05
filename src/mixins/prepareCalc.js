@@ -26,6 +26,7 @@ export default {
           //for 0000 bug
           if(this.valueVisible.at(0) === '0' && !this.valueVisible.includes('.') && nw === old + '0' && old !== '')
           this.setValueVisible(old);
+
         },
         actualCalc(nw) {
           if(!isFinite(nw)) this.showError(config.forever.title, config.forever.description);
