@@ -9,24 +9,23 @@ export default {
     watch: {
         valueVisible(nw, old) {
           ['+', '÷', 'x', '-', '.'].map((op,i, arr)=> {
-          if(nw === old + op && (nw.at(-1) === op && nw.at(-2) === op)) this.valueVisible = old;
-          if(nw.at(-1) === op && arr.includes(nw.at(-2))) this.valueVisible = old;
+          if(nw === old + op && (nw.at(-1) === op && nw.at(-2) === op)) setValueVisible(old);
+          if(nw.at(-1) === op && arr.includes(nw.at(-2))) setValueVisible(old);
           });
     
-          if(nw.includes('.') && this.valueVisible.lastIndexOf('.') > this.valueVisible.indexOf('.') && this.checkDotUsageRepeatedly()) this.valueVisible = old;
+          if(nw.includes('.') && this.valueVisible.lastIndexOf('.') > this.valueVisible.indexOf('.') && this.checkDotUsageRepeatedly()) setValueVisible(old);
           if(nw.includes('%') && nw.lastIndexOf('%') !== -1 && nw.lastIndexOf('%') === nw.length-1) {
             let oldVal = (+old / 100).toString();
             this.clear();
             if(isNaN(oldVal)) {
               this.showError(config.percent.title, config.percent.description)
             } else
-            this.valueVisible = oldVal;
+            setValueVisible(oldVal);
           }
     
           //for 0000 bug
-          if(this.valueVisible.at(0) === '0' && !this.valueVisible.includes('.') && nw === old + '0' && old !== '') {
-            this.valueVisible = old;
-          }
+          if(this.valueVisible.at(0) === '0' && !this.valueVisible.includes('.') && nw === old + '0' && old !== '')
+          setValueVisible(old);
         },
         actualCalc(nw) {
           if(!isFinite(nw)) this.showError(config.forever.title, config.forever.description);
@@ -73,6 +72,9 @@ export default {
              this.clear();
              break;
             }
+          },
+          setValueVisible(val) {
+            this.valueVisible = val;
           }
       }
 }

@@ -10,7 +10,7 @@
 		</div>
 		<div class="alert-content">
 			<p class="alert-title">{{title}}</p>
-			<p class="alert-body">{{msg}}</p>
+			<p class="alert-body">{{description}}</p>
 		</div>
 		<div class="alert-close" @click="handleClose">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    props: ['title', 'msg'],
+    props: ['title', 'description'],
 	methods: {
 		handleClose() {
 			this.$emit('close');
