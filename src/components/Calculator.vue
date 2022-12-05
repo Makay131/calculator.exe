@@ -64,6 +64,7 @@
 <script>
 import Alert from '../widgets/Alert';
 import config from '../config/errors.json';
+import calcPrepare from '../mixins/prepareCalc'
 
 export default {
   data() {
@@ -83,53 +84,18 @@ export default {
   components: {
     Alert
   },
+  mixins: [calcPrepare],
   methods: {
     handleBtnsClick(char) {
       this.focus();
 
       if(!['C', '=', '()', '+/-'].includes(char))
       this.valueVisible += char;
-      if(char === 'C') {
-        this.clear();
-      }
-
-      if(char === '()') {
-        if(
-          this.valueVisible.indexOf('(') == -1 ||
-          this.valueVisible.indexOf('(') != -1 &&
-          this.valueVisible.indexOf(')') != -1 &&
-          this.valueVisible.lastIndexOf('(') < this.valueVisible.lastIndexOf(')')
-        ) this.valueVisible += '(';
-        else if(
-          this.valueVisible.indexOf('(') != -1 &&
-          this.valueVisible.indexOf(')') == -1 ||
-          this.valueVisible.indexOf('(') != -1 &&
-          this.valueVisible.indexOf(')') != -1 &&
-          this.valueVisible.lastIndexOf('(') > this.valueVisible.lastIndexOf(')')
-        ) this.valueVisible += ')';
-
-        if(!isNaN(this.valueVisible.at(this.valueVisible.lastIndexOf('(')-1))) {
-          this.valueVisible = this.valueVisible.slice(0, this.valueVisible.length-1) + 'x(';
-        }
-      }
 
       if([...this.mathOps, '%'].includes(char) && (this.valueVisible.length === 1)) this.clear();
 
-      if(char === '.') {
-        if(this.valueVisible.length == 1)
-          this.valueVisible = '0.';
-        if(this.valueVisible.at(-2) === '(')
-          this.valueVisible = this.valueVisible.slice(0,-1) + '0.'
-      } 
-
-      if(char === '+/-') {
-        this.valueVisible === '' ? this.valueVisible += '(-' : this.valueVisible === '(-' ? this.clear() : '';
-        ['+', '-', 'x', '÷'].includes(this.valueVisible.at(-1)) && !this.valueVisible.includes('(-') ? this.valueVisible += '(-' : '';
-       if(!isNaN(+this.valueVisible)) {
-        let val = this.valueVisible;
-        this.clear();
-        this.valueVisible = '(-' + val;
-       }
+      if(['()', '.', '+/-', 'C'].includes(char)) {
+        this.makeCharWork(char);
       }
 
       //enter
@@ -138,8 +104,7 @@ export default {
           this.showError(config.notFinished.title, config.notFinished.description)
           return false; 
         }
-        
-        else
+      else
         this.calculate(this.calcValue)
       }
     },
@@ -185,39 +150,13 @@ export default {
     },
     handleBackspace() {
       this.valueVisible ? this.valueVisible = this.valueVisible.slice(0, this.valueVisible.length-1) : '';
-    },
+    }
   },
   computed: {
     calcValue() {
       let valVis = this.valueVisible;
       let result = valVis.replaceAll('÷', '/').replaceAll('x', '*');
       return result;
-    }
-  },
-  watch: {
-    valueVisible(nw, old) {
-      ['+', '÷', 'x', '-', '.'].map((op,i, arr)=> {
-      if(nw === old + op && (nw.at(-1) === op && nw.at(-2) === op)) this.valueVisible = old;
-      if(nw.at(-1) === op && arr.includes(nw.at(-2))) this.valueVisible = old;
-      });
-
-      if(nw.includes('.') && this.valueVisible.lastIndexOf('.') > this.valueVisible.indexOf('.') && this.checkDotUsageRepeatedly()) this.valueVisible = old;
-      if(nw.includes('%') && nw.lastIndexOf('%') !== -1 && nw.lastIndexOf('%') === nw.length-1) {
-        let oldVal = (+old / 100).toString();
-        this.clear();
-        if(isNaN(oldVal)) {
-          this.showError(config.percent.title, config.percent.description)
-        } else
-        this.valueVisible = oldVal;
-      }
-
-      //for 0000 bug
-      if(this.valueVisible.at(0) === '0' && !this.valueVisible.includes('.') && nw === old + '0' && old !== '') {
-        this.valueVisible = old;
-      }
-    },
-    actualCalc(nw) {
-      if(!isFinite(nw)) this.showError(config.forever.title, config.forever.description);
     }
   }
 };

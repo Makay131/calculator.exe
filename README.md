@@ -20,10 +20,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODOs
 
-
-write cleaner code, arrange stuff
-
-
 ERRORS:
 
 -0.000000000 is over-exaggerated
