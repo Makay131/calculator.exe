@@ -18,6 +18,9 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Live DEMO
+https://markovanbasten-calculator.netlify.app/
+
 ### TODOs
 
 ERRORS:
