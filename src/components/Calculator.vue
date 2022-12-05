@@ -1,10 +1,9 @@
 <template>
       <div class="main">
-      <Alert :title="title" :msg="description" class="alertik" @close="closeError" v-if="error"/>
+      <Alert :title="title" :description="description" class="alertik" @close="closeError" v-if="error"/>
       <div class="calculator-block">
     <div class="input-block">
       <textarea class="input-sum" autofocus rows="7" v-model="valueVisible" ref="textarea" @keydown="controlPressedKey"></textarea>
-      <!--add readonly attr later-->
       <p>{{actualCalc}}</p>
     </div>
     <div class="separator-block">
@@ -94,9 +93,7 @@ export default {
 
       if([...this.mathOps, '%'].includes(char) && (this.valueVisible.length === 1)) this.clear();
 
-      if(['()', '.', '+/-', 'C'].includes(char)) {
-        this.makeCharWork(char);
-      }
+      if(['()', '.', '+/-', 'C'].includes(char)) this.makeCharWork(char);
 
       //enter
       if(char === '=') {
@@ -110,12 +107,8 @@ export default {
     },
     controlPressedKey(event) {
       let allowedChars = [...this.characters, 'Backspace', '(', ')', 'ArrowRight', 'ArrowLeft', '/', '*']
-      if(!allowedChars.includes(event.key)) {
+      if(!allowedChars.includes(event.key) || event.key === 'x')
         event.preventDefault();
-      }
-      if(event.key === 'x') {
-        event.preventDefault();
-      }
     },
     calculate(string) {
      let calc = function(string) {
@@ -136,7 +129,7 @@ export default {
       let c = this.valueVisible.indexOf(this.operators[3]) < this.valueVisible.indexOf('.');
       let d = this.valueVisible.indexOf(this.operators[4]) < this.valueVisible.indexOf('.');
       if(a === b === c === d === true)
-      return true;
+        return true;
       else return false;
     },
     showError(title, desc) {
@@ -144,6 +137,8 @@ export default {
       this.title = `Error: ${title}!`;
       this.description = desc;
       this.error = true;
+
+      setTimeout(() => this.error = false, 5000);
     },
     closeError() {
       this.error = false;

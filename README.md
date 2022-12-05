@@ -18,6 +18,10 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Project Description
+
+.. A basic JS calculator. It is a wannabee for the calculator app on Android - Samsung Galaxy A8+ ..
+
 ## Live DEMO
 https://markovanbasten-calculator.netlify.app/
 
